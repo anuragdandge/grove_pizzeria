@@ -1,0 +1,7 @@
+Analyzing grove_pizzeria...                                     
+
+   info - The private field _mouseX could be 'final' - lib\pages\home.dart:26:10 - prefer_final_fields
+warning - The value of the field '_mouseX' isn't used - lib\pages\home.dart:26:10 - unused_field
+   info - The private field _mouseY could be 'final' - lib\pages\home.dart:27:10 - prefer_final_fields
+warning - The value of the field '_mouseY' isn't used - lib\pages\home.dart:27:10 - unused_field
+
