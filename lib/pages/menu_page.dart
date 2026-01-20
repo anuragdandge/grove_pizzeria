@@ -12,7 +12,6 @@ class MenuPage extends StatelessWidget {
       builder: (context, constraints) {
         bool isSmallScreen = constraints.maxWidth < 900;
         double horizontalPadding = isSmallScreen ? 24 : 120;
-
         return PageScaffold(
           activeSection: 'menu',
           child: Column(
