@@ -2,9 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grove_pizzeria/theme/app_theme.dart';
 import 'package:grove_pizzeria/widgets/page_scaffold.dart';
+import 'package:grove_pizzeria/widgets/custom_buttons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
+
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +28,7 @@ class AboutPage extends StatelessWidget {
               _buildOurStorySection(context, isSmallScreen),
               _buildAboutDetailSection(context, isSmallScreen),
               _buildPillarsSection(context, isSmallScreen),
+              _buildVisitUsSection(context, isSmallScreen),
             ],
           ),
         );
@@ -28,7 +38,6 @@ class AboutPage extends StatelessWidget {
 
   Widget _buildOurStorySection(BuildContext context, bool isSmallScreen) {
     if (isSmallScreen) {
-      // Mobile layout - stacked vertically
       return Container(
         padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 30),
         child: Column(
@@ -66,9 +75,8 @@ class AboutPage extends StatelessWidget {
         ),
       );
     } else {
-      // Desktop layout - text on left, no image yet
       return Container(
-        padding: const EdgeInsets.symmetric(vertical: 60),
+        padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 120),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,7 +88,6 @@ class AboutPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             SizedBox(
-              // width: 800,
               child: Text(
                 'A Love Letter to Wood-Fired Craft',
                 style: GoogleFonts.playfairDisplay(
@@ -110,7 +117,6 @@ class AboutPage extends StatelessWidget {
 
   Widget _buildAboutDetailSection(BuildContext context, bool isSmallScreen) {
     if (isSmallScreen) {
-      // Mobile layout
       return Container(
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
         child: Column(
@@ -157,13 +163,11 @@ class AboutPage extends StatelessWidget {
         ),
       );
     } else {
-      // Desktop layout - matching the design
       return Container(
         color: AppColors.groveCream,
         padding: const EdgeInsets.symmetric(horizontal: 120),
         child: Column(
           children: [
-            // Large hero image
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(
@@ -174,11 +178,9 @@ class AboutPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 80),
-            // Two-column text section with image
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Left column - The Wood-Fired Way
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,7 +206,6 @@ class AboutPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 60),
-                // Right column - Our Ingredients with image
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,7 +251,6 @@ class AboutPage extends StatelessWidget {
 
   Widget _buildPillarsSection(BuildContext context, bool isSmallScreen) {
     if (isSmallScreen) {
-      // Mobile layout - stacked vertically
       return Container(
         color: AppColors.groveEspresso,
         padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 30),
@@ -287,7 +287,6 @@ class AboutPage extends StatelessWidget {
         ),
       );
     } else {
-      // Desktop layout - horizontal with more spacing
       return Container(
         color: AppColors.groveEspresso,
         padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 120),
@@ -371,6 +370,79 @@ class AboutPage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildVisitUsSection(BuildContext context, bool isSmallScreen) {
+    return Container(
+      color: AppColors.groveCream,
+      padding: EdgeInsets.symmetric(
+        vertical: 100,
+        horizontal: isSmallScreen ? 30 : 120,
+      ),
+      child: Column(
+        children: [
+          Text(
+            'Experience the Grove',
+            style: GoogleFonts.playfairDisplay(
+              fontSize: isSmallScreen ? 40 : 56,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              color: AppColors.groveEspresso,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'We’re located in the heart of Baner. Come by for a slice, some fresh pasta, and an evening to remember.',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: AppColors.groveEspresso.withOpacity(0.7),
+            ),
+          ),
+          const SizedBox(height: 48),
+          if (isSmallScreen)
+            Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: PrimaryButton(
+                    text: 'GET DIRECTIONS',
+                    onTap: () =>
+                        _launchURL('https://maps.app.goo.gl/MeLECRNAMo2CdZH69'),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlineButton(
+                    text: 'BOOK A TABLE',
+                    onTap: () => _launchURL(
+                      'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
+                    ),
+                  ),
+                ),
+              ],
+            )
+          else
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                PrimaryButton(
+                  text: 'GET DIRECTIONS',
+                  onTap: () =>
+                      _launchURL('https://maps.app.goo.gl/MeLECRNAMo2CdZH69'),
+                ),
+                const SizedBox(width: 24),
+                OutlineButton(
+                  text: 'BOOK A TABLE',
+                  onTap: () => _launchURL(
+                    'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
+                  ),
+                ),
+              ],
+            ),
+        ],
+      ),
     );
   }
 }

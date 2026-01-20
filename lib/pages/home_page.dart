@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:grove_pizzeria/theme/app_theme.dart';
 import 'package:grove_pizzeria/widgets/page_scaffold.dart';
 import 'package:grove_pizzeria/widgets/custom_buttons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +77,7 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Wood-fired perfection, crafted with passion and served with love in our neighborhood pizzeria.',
+                  'Authentic sourdough Neapolitan pizzas, handmade pastas, and cozy ambiance in the heart of Baner. Famous for our pillowy soft crusts.',
                   textAlign: TextAlign.center,
                   maxLines: 3,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -92,8 +100,10 @@ class HomePage extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: SecondaryButton(
-                          text: 'ORDER NOW',
-                          onTap: () => Navigator.pushNamed(context, '/order'),
+                          text: 'BOOK A TABLE',
+                          onTap: () => _launchURL(
+                            'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
+                          ),
                         ),
                       ),
                     ],
@@ -108,8 +118,10 @@ class HomePage extends StatelessWidget {
                       ),
                       const SizedBox(width: 24),
                       SecondaryButton(
-                        text: 'ORDER NOW',
-                        onTap: () => Navigator.pushNamed(context, '/order'),
+                        text: 'BOOK A TABLE',
+                        onTap: () => _launchURL(
+                          'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
+                        ),
                       ),
                     ],
                   ),
@@ -123,7 +135,6 @@ class HomePage extends StatelessWidget {
 
   Widget _buildStorySection(BuildContext context, bool isSmallScreen) {
     if (isSmallScreen) {
-      // Mobile layout - stacked vertically
       return Container(
         color: AppColors.groveCream,
         padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 30),
@@ -145,7 +156,7 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             Text(
-              'At Grove, every pizza tells a story. Our wood-fired oven, the heart of our kitchen, reaches temperatures that create the perfect char and those signature leopard spots on our hand-stretched dough.\n\nWe source locally, craft passionately, and serve generously—because pizza is more than food, it\'s a gathering, a celebration, a moment of pure joy.',
+              'A popular spot in Baner known for its authentic sourdough Neapolitan pizzas, handmade pastas, and cozy ambiance. Famous for its pillowy soft crusts and exquisite Tiramisu.\n\nWe source locally, craft passionately, and serve generously—because pizza is more than food, it\'s a gathering, a celebration, a moment of pure joy.',
               style: Theme.of(
                 context,
               ).textTheme.bodyLarge?.copyWith(fontSize: 16, height: 1.6),
@@ -169,7 +180,6 @@ class HomePage extends StatelessWidget {
         ),
       );
     } else {
-      // Desktop layout - side by side
       return Container(
         color: AppColors.groveCream,
         padding: const EdgeInsets.symmetric(vertical: 120, horizontal: 100),
@@ -194,7 +204,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   Text(
-                    'At Grove, every pizza tells a story. Our wood-fired oven, the heart of our kitchen, reaches temperatures that create the perfect char and those signature leopard spots on our hand-stretched dough.\n\nWe source locally, craft passionately, and serve generously—because pizza is more than food, it\'s a gathering, a celebration, a moment of pure joy.',
+                    'A popular spot in Baner known for its authentic sourdough Neapolitan pizzas, handmade pastas, and cozy ambiance. Famous for its pillowy soft crusts and exquisite Tiramisu.\n\nWe source locally, craft passionately, and serve generously—because pizza is more than food, it\'s a gathering, a celebration, a moment of pure joy.',
                     style: Theme.of(
                       context,
                     ).textTheme.bodyLarge?.copyWith(fontSize: 16, height: 1.6),
@@ -420,7 +430,6 @@ class HomePage extends StatelessWidget {
                     ?.copyWith(
                       color: AppColors.groveCream,
                       fontStyle: FontStyle.italic,
-
                       height: 1.4,
                     ),
           ),
@@ -469,15 +478,18 @@ class HomePage extends StatelessWidget {
                   width: double.infinity,
                   child: PrimaryButton(
                     text: 'GET DIRECTIONS',
-                    onTap: () => Navigator.pushNamed(context, '/contact'),
+                    onTap: () =>
+                        _launchURL('https://maps.app.goo.gl/MeLECRNAMo2CdZH69'),
                   ),
                 ),
                 const SizedBox(height: 16),
                 SizedBox(
                   width: double.infinity,
                   child: OutlineButton(
-                    text: 'VIEW MENU',
-                    onTap: () => Navigator.pushNamed(context, '/menu'),
+                    text: 'BOOK A TABLE',
+                    onTap: () => _launchURL(
+                      'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
+                    ),
                   ),
                 ),
               ],
@@ -488,12 +500,15 @@ class HomePage extends StatelessWidget {
               children: [
                 PrimaryButton(
                   text: 'GET DIRECTIONS',
-                  onTap: () => Navigator.pushNamed(context, '/contact'),
+                  onTap: () =>
+                      _launchURL('https://maps.app.goo.gl/MeLECRNAMo2CdZH69'),
                 ),
                 const SizedBox(width: 24),
                 OutlineButton(
-                  text: 'VIEW MENU',
-                  onTap: () => Navigator.pushNamed(context, '/menu'),
+                  text: 'BOOK A TABLE',
+                  onTap: () => _launchURL(
+                    'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
+                  ),
                 ),
               ],
             ),

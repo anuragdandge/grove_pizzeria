@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grove_pizzeria/theme/app_theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
+
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +78,11 @@ class Footer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _footerHeader('EXPLORE'),
-              _footerLink('Menu'),
-              _footerLink('About'),
-              _footerLink('Gallery'),
-              _footerLink('Order'),
-              _footerLink('Contact'),
+              _footerNavLink(context, 'Menu', '/menu'),
+              _footerNavLink(context, 'About', '/about'),
+              _footerNavLink(context, 'Gallery', '/gallery'),
+              _footerNavLink(context, 'Order', '/order'),
+              _footerNavLink(context, 'Contact', '/contact'),
             ],
           ),
         ),
@@ -88,10 +96,21 @@ class Footer extends StatelessWidget {
               _footerHeader('VISIT THE GROVE'),
               _footerContactItem(
                 Icons.location_on_outlined,
-                '123 Artisan Lane,\nBakery District, City 560001',
+                'Shop 1, Venkatesh Society,\nNear Zudio, Baner Road, Baner,\nPune, Maharashtra 411045',
+                onTap: () =>
+                    _launchURL('https://maps.app.goo.gl/MeLECRNAMo2CdZH69'),
               ),
-              _footerContactItem(Icons.phone_outlined, '+91 98765 43210'),
-              _footerContactItem(Icons.camera_alt_outlined, '@grove_pizzeria'),
+              _footerContactItem(
+                Icons.phone_outlined,
+                '+91 96076 01217',
+                onTap: () => _launchURL('tel:+919607601217'),
+              ),
+              _footerContactItem(
+                Icons.camera_alt_outlined,
+                '@grove_pizzeria',
+                onTap: () =>
+                    _launchURL('https://www.instagram.com/grove_pizzeria'),
+              ),
             ],
           ),
         ),
@@ -107,20 +126,22 @@ class Footer extends StatelessWidget {
         const SizedBox(height: 24),
         _brandDescription(context),
         const SizedBox(height: 48),
-        // _footerHeader('EXPLORE'),
-        // _footerLink('Menu'),
-        // _footerLink('About'),
-        // _footerLink('Gallery'),
-        // _footerLink('Order'),
-        // _footerLink('Contact'),
-        // const SizedBox(height: 48),
         _footerHeader('VISIT THE GROVE'),
         _footerContactItem(
           Icons.location_on_outlined,
-          '123 Artisan Lane,\nBakery District, City 560001',
+          'Shop 1, Venkatesh Society,\nNear Zudio, Baner Road, Baner,\nPune, Maharashtra 411045',
+          onTap: () => _launchURL('https://maps.app.goo.gl/MeLECRNAMo2CdZH69'),
         ),
-        _footerContactItem(Icons.phone_outlined, '+91 98765 43210'),
-        _footerContactItem(Icons.camera_alt_outlined, '@grove_pizzeria'),
+        _footerContactItem(
+          Icons.phone_outlined,
+          '+91 96076 01217',
+          onTap: () => _launchURL('tel:+919607601217'),
+        ),
+        _footerContactItem(
+          Icons.camera_alt_outlined,
+          '@grove_pizzeria',
+          onTap: () => _launchURL('https://www.instagram.com/grove_pizzeria'),
+        ),
       ],
     );
   }
@@ -139,7 +160,7 @@ class Footer extends StatelessWidget {
 
   Widget _brandDescription(BuildContext context) {
     return Text(
-      'Authentic wood-fired pizzas crafted with love, served in the heart of the neighborhood.',
+      'Authentic sourdough Neapolitan pizzas, handmade pastas, and cozy ambiance in the heart of Baner.',
       style: GoogleFonts.ibarraRealNova(
         color: AppColors.groveCream.withOpacity(0.8),
         height: 1.6,
@@ -163,11 +184,11 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _footerLink(String label) {
+  Widget _footerNavLink(BuildContext context, String label, String route) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: InkWell(
-        onTap: () {},
+        onTap: () => Navigator.pushNamed(context, route),
         child: Text(
           label,
           style: GoogleFonts.ibarraRealNova(
@@ -179,25 +200,32 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _footerContactItem(IconData icon, String text) {
+  Widget _footerContactItem(IconData icon, String text, {VoidCallback? onTap}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: AppColors.groveHoney, size: 20),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Text(
-              text,
-              style: GoogleFonts.ibarraRealNova(
-                color: AppColors.groveCream.withOpacity(0.8),
-                fontSize: 16,
-                height: 1.4,
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, color: AppColors.groveHoney, size: 20),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                text,
+                style: GoogleFonts.ibarraRealNova(
+                  color: AppColors.groveCream.withOpacity(0.8),
+                  fontSize: 16,
+                  height: 1.4,
+                  decoration: onTap != null
+                      ? TextDecoration.underline
+                      : TextDecoration.none,
+                  decorationColor: AppColors.groveCream.withOpacity(0.2),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
