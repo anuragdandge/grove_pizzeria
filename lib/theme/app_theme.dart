@@ -33,6 +33,12 @@ class AppTheme {
           fontStyle: FontStyle.italic,
           color: AppColors.groveEspresso,
         ),
+        displaySmall: GoogleFonts.playfairDisplay(
+          fontSize: 48,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,
+          color: AppColors.groveEspresso,
+        ),
         headlineLarge: GoogleFonts.josefinSans(
           fontSize: 48,
           fontWeight: FontWeight.bold,

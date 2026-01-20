@@ -16,7 +16,7 @@ class Footer extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.symmetric(
             horizontal: isSmallScreen ? 30 : 120,
-            vertical: isSmallScreen ? 60 : 100,
+            vertical: isSmallScreen ? 60 : 80,
           ),
           child: Column(
             children: [
@@ -24,12 +24,12 @@ class Footer extends StatelessWidget {
                 _buildMobileFooter(context)
               else
                 _buildDesktopFooter(context),
-              const SizedBox(height: 80),
+              const SizedBox(height: 40),
               Divider(
                 color: AppColors.groveCream.withOpacity(0.1),
                 thickness: 1,
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               Text(
                 '© 2026 Grove Pizzeria. Crafted with 🔥 and love.',
                 style: GoogleFonts.ibarraRealNova(
@@ -107,13 +107,13 @@ class Footer extends StatelessWidget {
         const SizedBox(height: 24),
         _brandDescription(context),
         const SizedBox(height: 48),
-        _footerHeader('EXPLORE'),
-        _footerLink('Menu'),
-        _footerLink('About'),
-        _footerLink('Gallery'),
-        _footerLink('Order'),
-        _footerLink('Contact'),
-        const SizedBox(height: 48),
+        // _footerHeader('EXPLORE'),
+        // _footerLink('Menu'),
+        // _footerLink('About'),
+        // _footerLink('Gallery'),
+        // _footerLink('Order'),
+        // _footerLink('Contact'),
+        // const SizedBox(height: 48),
         _footerHeader('VISIT THE GROVE'),
         _footerContactItem(
           Icons.location_on_outlined,

@@ -19,6 +19,7 @@ class PrimaryButton extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             child: Container(
+              alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
               decoration: BoxDecoration(
                 color: isHovered
@@ -53,6 +54,7 @@ class SecondaryButton extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             child: Container(
+              alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
               decoration: BoxDecoration(
                 color: isHovered
@@ -92,7 +94,7 @@ class OutlineButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(text, style: Theme.of(context).textTheme.labelLarge),
             const SizedBox(width: 12),

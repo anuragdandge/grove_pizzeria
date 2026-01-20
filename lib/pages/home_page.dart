@@ -139,10 +139,9 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               'From Fire to Table',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontStyle: FontStyle.italic,
-                fontFamily: 'Playfair Display',
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineMedium?.copyWith(fontStyle: FontStyle.italic),
             ),
             const SizedBox(height: 32),
             Text(
@@ -191,7 +190,6 @@ class HomePage extends StatelessWidget {
                     'From Fire to Table',
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontStyle: FontStyle.italic,
-                      fontFamily: 'Playfair Display',
                     ),
                   ),
                   const SizedBox(height: 32),
@@ -422,7 +420,7 @@ class HomePage extends StatelessWidget {
                     ?.copyWith(
                       color: AppColors.groveCream,
                       fontStyle: FontStyle.italic,
-                      fontFamily: 'Playfair Display',
+
                       height: 1.4,
                     ),
           ),
