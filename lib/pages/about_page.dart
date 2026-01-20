@@ -56,8 +56,8 @@ class AboutPage extends StatelessWidget {
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop',
+              child: Image.asset(
+                'assets/pizzeria-interior.jpg',
                 height: 600,
                 fit: BoxFit.cover,
               ),
@@ -89,15 +89,15 @@ class AboutPage extends StatelessWidget {
             itemBuilder: (context, index) {
               final heights = [400, 600, 450, 500, 400];
               final images = [
-                'https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?q=80&w=1976&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1550966841-3ee7adac1668?q=80&w=2070&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1974&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop',
+                'assets/pizza-making.jpg',
+                'assets/pizzeria-interior.jpg',
+                'assets/margherita-pizza.jpg',
+                'assets/truffle-pizza.jpg',
+                'assets/hero-pizza.jpg',
               ];
               return ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
+                child: Image.asset(
                   images[index % images.length],
                   height: heights[index % heights.length].toDouble(),
                   fit: BoxFit.cover,

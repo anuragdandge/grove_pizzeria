@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grove_pizzeria/widgets/navbar.dart';
 import 'package:grove_pizzeria/widgets/footer.dart';
+import 'package:grove_pizzeria/widgets/mobile_menu.dart';
 
 class PageScaffold extends StatelessWidget {
   final Widget child;
@@ -15,6 +16,13 @@ class PageScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: MobileMenu(
+        activeSection: activeSection,
+        onNavItemTap: (section) {
+          if (section == activeSection) return;
+          Navigator.of(context).pushNamed('/$section');
+        },
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

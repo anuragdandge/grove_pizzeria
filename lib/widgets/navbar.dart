@@ -14,46 +14,60 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 80),
-      color: AppColors.groveCream,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Logo
-          InkWell(
-            onTap: () => onNavItemTap('home'),
-            child: Text(
-              'GROVE',
-              style: GoogleFonts.josefinSans(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 4,
-                color: AppColors.groveEspresso,
-              ),
-            ),
-          ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        bool isSmallScreen = constraints.maxWidth < 900;
 
-          // Navigation Items
-          Row(
+        return Container(
+          height: isSmallScreen ? 80 : 100,
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 80),
+          color: AppColors.groveCream,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _navItem('HOME', activeSection == 'home'),
-              const SizedBox(width: 40),
-              _navItem('ABOUT', activeSection == 'about'),
-              const SizedBox(width: 40),
-              _navItem('MENU', activeSection == 'menu'),
-              const SizedBox(width: 40),
-              _navItem('GALLERY', activeSection == 'gallery'),
-              const SizedBox(width: 40),
-              _navItem('ORDER', activeSection == 'order'),
-              const SizedBox(width: 40),
-              _navItem('CONTACT', activeSection == 'contact'),
+              // Logo
+              InkWell(
+                onTap: () => onNavItemTap('home'),
+                child: Text(
+                  'GROVE',
+                  style: GoogleFonts.josefinSans(
+                    fontSize: isSmallScreen ? 24 : 32,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 4,
+                    color: AppColors.groveEspresso,
+                  ),
+                ),
+              ),
+
+              // Navigation Items or Hamburger Menu
+              if (isSmallScreen)
+                IconButton(
+                  icon: const Icon(Icons.menu, color: AppColors.groveEspresso),
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                )
+              else
+                Row(
+                  children: [
+                    _navItem('HOME', activeSection == 'home'),
+                    const SizedBox(width: 40),
+                    _navItem('ABOUT', activeSection == 'about'),
+                    const SizedBox(width: 40),
+                    _navItem('MENU', activeSection == 'menu'),
+                    const SizedBox(width: 40),
+                    _navItem('GALLERY', activeSection == 'gallery'),
+                    const SizedBox(width: 40),
+                    _navItem('ORDER', activeSection == 'order'),
+                    const SizedBox(width: 40),
+                    _navItem('CONTACT', activeSection == 'contact'),
+                  ],
+                ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 

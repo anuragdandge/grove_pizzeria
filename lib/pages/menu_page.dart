@@ -118,9 +118,7 @@ class MenuPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   image: const DecorationImage(
-                    image: NetworkImage(
-                      'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=1935&auto=format&fit=crop',
-                    ),
+                    image: AssetImage('assets/truffle-pizza.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
