@@ -32,7 +32,7 @@ class GrovePizzeria extends StatelessWidget {
             page = const AboutPage();
             break;
           case '/menu':
-            page = const MenuPage();
+            page = MenuPage();
             break;
           case '/gallery':
             page = const GalleryPage();
