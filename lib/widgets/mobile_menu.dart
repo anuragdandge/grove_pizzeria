@@ -29,14 +29,29 @@ class MobileMenu extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'GROVE',
-                    style: GoogleFonts.josefinSans(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 4,
-                      color: AppColors.groveEspresso,
-                    ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'GROVE',
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 4,
+                          color: AppColors.groveEspresso,
+                        ),
+                      ),
+                      Text(
+                        '#doughbythebros',
+                        style: GoogleFonts.josefinSans(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1,
+                          color: AppColors.groveEspresso.withOpacity(0.7),
+                        ),
+                      ),
+                    ],
                   ),
                   IconButton(
                     icon: const Icon(
@@ -49,14 +64,22 @@ class MobileMenu extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 50),
-
-              // Navigation Items
-              _mobileNavItem(context, 'HOME', activeSection == 'home'),
-              _mobileNavItem(context, 'ABOUT', activeSection == 'about'),
-              _mobileNavItem(context, 'MENU', activeSection == 'menu'),
-              _mobileNavItem(context, 'GALLERY', activeSection == 'gallery'),
-              _mobileNavItem(context, 'ORDER', activeSection == 'order'),
-              _mobileNavItem(context, 'CONTACT', activeSection == 'contact'),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _mobileNavItem(context, 'HOME', activeSection == 'home'),
+                      _mobileNavItem(context, 'ABOUT', activeSection == 'about'),
+                      _mobileNavItem(context, 'MENU', activeSection == 'menu'),
+                      _mobileNavItem(context, 'GALLERY', activeSection == 'gallery'),
+                      _mobileNavItem(context, 'ORDER', activeSection == 'order'),
+                      _mobileNavItem(context, 'CATERING', activeSection == 'catering'),
+                      _mobileNavItem(context, 'CONTACT', activeSection == 'contact'),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

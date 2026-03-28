@@ -63,69 +63,69 @@ class HomePage extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Authentic Slices,\nRooted in the Grove',
-                  textAlign: TextAlign.center,
-                  style:
-                      (isSmallScreen
-                              ? Theme.of(context).textTheme.displayMedium
-                              : Theme.of(context).textTheme.displayLarge)
-                          ?.copyWith(color: AppColors.groveCream, height: 1.1),
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  'Authentic sourdough Neapolitan pizzas, handmade pastas, and cozy ambiance in the heart of Baner. Famous for our pillowy soft crusts.',
-                  textAlign: TextAlign.center,
-                  maxLines: 3,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: AppColors.groveCream.withOpacity(0.9),
-                    fontSize: isSmallScreen ? 16 : 20,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20),
+                  Text(
+                    'Authentic Slices,\nRooted in the Grove',
+                    textAlign: TextAlign.center,
+                    style:
+                        (isSmallScreen
+                                ? Theme.of(context).textTheme.displayMedium
+                                : Theme.of(context).textTheme.displayLarge)
+                            ?.copyWith(color: AppColors.groveCream, height: 1.1),
                   ),
-                ),
-                const SizedBox(height: 48),
-                if (isSmallScreen)
-                  Column(
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        child: PrimaryButton(
+                  const SizedBox(height: 24),
+                  Text(
+                    'Authentic sourdough Neapolitan pizzas, handmade pastas, and cozy ambiance in the heart of Baner. Famous for our pillowy soft crusts.',
+                    textAlign: TextAlign.center,
+                    maxLines: 4,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: AppColors.groveCream.withOpacity(0.9),
+                      fontSize: isSmallScreen ? 16 : 20,
+                    ),
+                  ),
+                  const SizedBox(height: 48),
+                  if (isSmallScreen)
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: PrimaryButton(
+                            text: 'EXPLORE MENU',
+                            onTap: () => Navigator.pushNamed(context, '/menu'),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          width: double.infinity,
+                          child: SecondaryButton(
+                            text: 'CONTACT US',
+                            onTap: () => Navigator.pushNamed(context, '/contact'),
+                          ),
+                        ),
+                      ],
+                    )
+                  else
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        PrimaryButton(
                           text: 'EXPLORE MENU',
                           onTap: () => Navigator.pushNamed(context, '/menu'),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        child: SecondaryButton(
-                          text: 'BOOK A TABLE',
-                          onTap: () => _launchURL(
-                            'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
-                          ),
+                        const SizedBox(width: 24),
+                        SecondaryButton(
+                          text: 'CONTACT US',
+                          onTap: () => Navigator.pushNamed(context, '/contact'),
                         ),
-                      ),
-                    ],
-                  )
-                else
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      PrimaryButton(
-                        text: 'EXPLORE MENU',
-                        onTap: () => Navigator.pushNamed(context, '/menu'),
-                      ),
-                      const SizedBox(width: 24),
-                      SecondaryButton(
-                        text: 'BOOK A TABLE',
-                        onTap: () => _launchURL(
-                          'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
-                        ),
-                      ),
-                    ],
-                  ),
-              ],
+                      ],
+                    ),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ],
@@ -486,10 +486,8 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: OutlineButton(
-                    text: 'BOOK A TABLE',
-                    onTap: () => _launchURL(
-                      'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
-                    ),
+                    text: 'CONTACT US',
+                    onTap: () => Navigator.pushNamed(context, '/contact'),
                   ),
                 ),
               ],
@@ -505,10 +503,8 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(width: 24),
                 OutlineButton(
-                  text: 'BOOK A TABLE',
-                  onTap: () => _launchURL(
-                    'https://www.google.com/maps/reserve/v/dine/c/uV5GJSx1lCk?source=pa&opi=89978449&hl=en-IN&gei=QMtvaa23NML31e8Pyb_PCQ&sourceurl=https://www.google.com/search?client%3Dfirefox-b-d%26q%3Dgrove%2Bpizzeria%26sei%3DNctvadCCIPLW1e8PtOuc8AQ%26dlnr%3D1',
-                  ),
+                  text: 'CONTACT US',
+                  onTap: () => Navigator.pushNamed(context, '/contact'),
                 ),
               ],
             ),

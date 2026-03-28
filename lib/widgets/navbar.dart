@@ -29,14 +29,29 @@ class Navbar extends StatelessWidget {
               // Logo
               InkWell(
                 onTap: () => onNavItemTap('home'),
-                child: Text(
-                  'GROVE',
-                  style: GoogleFonts.josefinSans(
-                    fontSize: isSmallScreen ? 24 : 32,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 4,
-                    color: AppColors.groveEspresso,
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'GROVE',
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: isSmallScreen ? 28 : 36,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 4,
+                        color: AppColors.groveEspresso,
+                      ),
+                    ),
+                    Text(
+                      '#doughbythebros',
+                      style: GoogleFonts.josefinSans(
+                        fontSize: isSmallScreen ? 10 : 12,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1,
+                        color: AppColors.groveEspresso.withOpacity(0.7),
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
@@ -60,7 +75,9 @@ class Navbar extends StatelessWidget {
                     _navItem('GALLERY', activeSection == 'gallery'),
                     const SizedBox(width: 40),
                     _navItem('ORDER', activeSection == 'order'),
-                    const SizedBox(width: 40),
+                    const SizedBox(width: 30),
+                    _navItem('CATERING', activeSection == 'catering'),
+                    const SizedBox(width: 30),
                     _navItem('CONTACT', activeSection == 'contact'),
                   ],
                 ),

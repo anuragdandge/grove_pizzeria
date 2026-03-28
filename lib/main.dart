@@ -5,6 +5,7 @@ import 'package:grove_pizzeria/pages/menu_page.dart';
 import 'package:grove_pizzeria/pages/gallery_page.dart';
 import 'package:grove_pizzeria/pages/order_page.dart';
 import 'package:grove_pizzeria/pages/contact_page.dart';
+import 'package:grove_pizzeria/pages/outdoor_catering_page.dart';
 import 'package:grove_pizzeria/theme/app_theme.dart';
 
 void main() {
@@ -42,6 +43,9 @@ class GrovePizzeria extends StatelessWidget {
             break;
           case '/contact':
             page = const ContactPage();
+            break;
+          case '/catering':
+            page = const OutdoorCateringPage();
             break;
           default:
             page = const HomePage();

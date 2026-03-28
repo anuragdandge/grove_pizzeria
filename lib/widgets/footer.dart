@@ -111,6 +111,12 @@ class Footer extends StatelessWidget {
                 onTap: () =>
                     _launchURL('https://www.instagram.com/grove_pizzeria'),
               ),
+              _footerContactItem(
+                Icons.search,
+                'Search for us on Google',
+                onTap: () =>
+                    _launchURL('https://share.google/xYetq90Xd0TLN979P'),
+              ),
             ],
           ),
         ),
@@ -142,19 +148,39 @@ class Footer extends StatelessWidget {
           '@grove_pizzeria',
           onTap: () => _launchURL('https://www.instagram.com/grove_pizzeria'),
         ),
+        _footerContactItem(
+          Icons.search,
+          'Search for us on Google',
+          onTap: () => _launchURL('https://share.google/xYetq90Xd0TLN979P'),
+        ),
       ],
     );
   }
 
   Widget _brandLogo() {
-    return Text(
-      'GROVE',
-      style: GoogleFonts.josefinSans(
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        letterSpacing: 4,
-        color: AppColors.groveCream,
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'GROVE',
+          style: GoogleFonts.playfairDisplay(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 4,
+            color: AppColors.groveCream,
+          ),
+        ),
+        Text(
+          '#doughbythebros',
+          style: GoogleFonts.josefinSans(
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 1,
+            color: AppColors.groveCream.withOpacity(0.7),
+          ),
+        ),
+      ],
     );
   }
 
