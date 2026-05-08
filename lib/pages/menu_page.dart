@@ -173,6 +173,7 @@ class MenuPage extends StatelessWidget {
                     item['price']!,
                     isVeg: item['isVeg'] == 'true',
                     isPopular: item['isPopular'] == 'true',
+                    imageUrl: item['image'],
                   ),
                 )
                 .toList(),
@@ -189,12 +190,35 @@ class MenuPage extends StatelessWidget {
     String price, {
     bool isVeg = false,
     bool isPopular = false,
+    String? imageUrl,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (imageUrl != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: Image.asset(
+                  imageUrl,
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                  cacheWidth: 160,
+                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                    if (wasSynchronouslyLoaded) return child;
+                    return AnimatedOpacity(
+                      opacity: frame == null ? 0 : 1,
+                      duration: const Duration(milliseconds: 300),
+                      child: child,
+                    );
+                  },
+                ),
+              ),
+            ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,20 +341,20 @@ class MenuPage extends StatelessWidget {
           const SizedBox(height: 80),
           _buildSpecialItem(
             context,
-            'Pesto Cherry\nTomato Pizza',
-            'A customer favorite featuring homemade pesto, fresh mozzarella, sundried tomatoes, and parmesan. Our signature sourdough crust makes it unforgettable.',
-            '₹419',
-            'assets/margherita-pizza.jpg', // Reusing asset
+            'Popey\'s Protein\nPizza',
+            'Our powerhouse pizza topped with nutrient-rich spinach, fresh mozzarella, lean protein, and our signature San Marzano sauce. A wholesome masterpiece.',
+            '₹489',
+            'assets/popeys_protein_1.JPG',
             isSmallScreen,
             isReversed: false,
           ),
           SizedBox(height: isSmallScreen ? 80 : 120),
           _buildSpecialItem(
             context,
-            'Spaghetti Alla\nCarbonara',
-            'Highly recommended authentic flavor. Spaghetti tossed in creamy egg yolk, parmesan, bacon, and black pepper. A true Italian soul dish.',
-            '₹629',
-            'assets/truffle-pizza.jpg', // Reusing asset
+            'Mushroom Bechamel\nwith Spaghetti',
+            'Luxurious creamy bechamel sauce infused with earthy mushrooms, tossed with al dente spaghetti and finished with aged parmesan and fresh herbs.',
+            '₹649',
+            'assets/Mushroom Bechamel with Spaghetti.JPG',
             isSmallScreen,
             isReversed: true,
           ),
@@ -355,6 +379,15 @@ class MenuPage extends StatelessWidget {
         width: isSmallScreen ? double.infinity : 600,
         height: isSmallScreen ? 350 : 500,
         fit: BoxFit.cover,
+        cacheWidth: isSmallScreen ? 800 : 1000,
+        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+          if (wasSynchronouslyLoaded) return child;
+          return AnimatedOpacity(
+            opacity: frame == null ? 0 : 1,
+            duration: const Duration(milliseconds: 500),
+            child: child,
+          );
+        },
       ),
     );
 
@@ -540,12 +573,30 @@ class MenuPage extends StatelessWidget {
 
   final List<Map<String, String>> _pizzaItems = [
     {
+      'name': 'Popey\'s Protein (Veg)',
+      'desc':
+          'Rich spinach, fresh mozzarella, lean protein chunks, and our signature San Marzano sauce.',
+      'price': '₹489',
+      'isVeg': 'true',
+      'isPopular': 'true',
+      'image': 'assets/popeys_protein_1.JPG',
+    },
+    {
       'name': 'Shrooms (Veg)',
       'desc':
           'San Marzano sauce, fresh mozzarella, braised mushrooms, arugula, goat cheese, balsamic glaze.',
       'price': '₹469',
       'isVeg': 'true',
       'isPopular': 'true',
+    },
+    {
+      'name': 'Classic Pepperoni',
+      'desc':
+          'San Marzano sauce, fresh mozzarella, premium pepperoni, and parmesan cheese.',
+      'price': '₹459',
+      'isVeg': 'false',
+      'isPopular': 'true',
+      'image': 'assets/Classic_Paparoni.JPG',
     },
     {
       'name': 'Pesto Cherry Tomato',
@@ -572,14 +623,6 @@ class MenuPage extends StatelessWidget {
       'isPopular': 'false',
     },
     {
-      'name': 'Classic Pepperoni',
-      'desc':
-          'San Marzano sauce, fresh mozzarella, pepperoni, and parmesan cheese.',
-      'price': '₹379',
-      'isVeg': 'false',
-      'isPopular': 'true',
-    },
-    {
       'name': 'Ham and Cheese',
       'desc':
           'San Marzano sauce, cheddar, chicken/pork ham, parmesan, and capers.',
@@ -598,6 +641,33 @@ class MenuPage extends StatelessWidget {
   ];
 
   final List<Map<String, String>> _pastaItems = [
+    {
+      'name': 'Mushroom Bechamel Spaghetti',
+      'desc':
+          'Creamy bechamel, earthy mushrooms, al dente spaghetti, parmesan, and fresh herbs.',
+      'price': '₹649',
+      'isVeg': 'true',
+      'isPopular': 'true',
+      'image': 'assets/Mushroom Bechamel with Spaghetti.JPG',
+    },
+    {
+      'name': 'Sweet Potato Gnocchi',
+      'desc':
+          'Handmade sweet potato gnocchi served with a vibrant sundried tomato sauce.',
+      'price': '₹589',
+      'isVeg': 'true',
+      'isPopular': 'true',
+      'image': 'assets/Sweet Potato Gnocchi with Sundried Tomato Sauce.jpg',
+    },
+    {
+      'name': 'Creamy Pesto Farfalle',
+      'desc':
+          'Farfalle pasta tossed in our signature creamy pesto sauce with roasted nuts.',
+      'price': '₹549',
+      'isVeg': 'true',
+      'isPopular': 'false',
+      'image': 'assets/creamy_pesto_farfalle.JPG',
+    },
     {
       'name': 'Marinara Fusilli',
       'desc':

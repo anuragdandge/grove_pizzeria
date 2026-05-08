@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/hero-pizza.jpg'),
+                image: AssetImage('assets/from_fire_to_table.JPG'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -75,7 +75,10 @@ class HomePage extends StatelessWidget {
                         (isSmallScreen
                                 ? Theme.of(context).textTheme.displayMedium
                                 : Theme.of(context).textTheme.displayLarge)
-                            ?.copyWith(color: AppColors.groveCream, height: 1.1),
+                            ?.copyWith(
+                              color: AppColors.groveCream,
+                              height: 1.1,
+                            ),
                   ),
                   const SizedBox(height: 24),
                   Text(
@@ -103,7 +106,8 @@ class HomePage extends StatelessWidget {
                           width: double.infinity,
                           child: SecondaryButton(
                             text: 'CONTACT US',
-                            onTap: () => Navigator.pushNamed(context, '/contact'),
+                            onTap: () =>
+                                Navigator.pushNamed(context, '/contact'),
                           ),
                         ),
                       ],
@@ -170,10 +174,19 @@ class HomePage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: Image.asset(
-                'assets/pizza-making.jpg',
+                'assets/chef_with_the_boxes.JPG',
                 width: double.infinity,
                 height: 300,
                 fit: BoxFit.cover,
+                cacheWidth: 800,
+                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                  if (wasSynchronouslyLoaded) return child;
+                  return AnimatedOpacity(
+                    opacity: frame == null ? 0 : 1,
+                    duration: const Duration(milliseconds: 500),
+                    child: child,
+                  );
+                },
               ),
             ),
           ],
@@ -222,10 +235,19 @@ class HomePage extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(4),
                 child: Image.asset(
-                  'assets/pizza-making.jpg',
+                  'assets/dough_in_the_air.JPG',
                   width: double.infinity,
                   height: 600,
                   fit: BoxFit.cover,
+                  cacheWidth: 1000,
+                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                    if (wasSynchronouslyLoaded) return child;
+                    return AnimatedOpacity(
+                      opacity: frame == null ? 0 : 1,
+                      duration: const Duration(milliseconds: 500),
+                      child: child,
+                    );
+                  },
                 ),
               ),
             ),
@@ -266,7 +288,7 @@ class HomePage extends StatelessWidget {
                   context,
                   'The Menu',
                   'From classic Margherita to seasonal specials—explore our wood-fired creations.',
-                  'assets/margherita-pizza.jpg',
+                  'assets/pasta 1.JPG',
                   () => Navigator.pushNamed(context, '/menu'),
                   true,
                 ),
@@ -275,7 +297,7 @@ class HomePage extends StatelessWidget {
                   context,
                   'Feature Gallery',
                   'A visual feast of our pizzas, space, and the moments we cherish.',
-                  'assets/pizzeria-interior.jpg',
+                  'assets/oven_pizza_2.jpg',
                   () => Navigator.pushNamed(context, '/gallery'),
                   true,
                 ),
@@ -284,7 +306,7 @@ class HomePage extends StatelessWidget {
                   context,
                   'Order Now',
                   'Can\'t make it to the Grove? We\'ll bring the fire to your doorstep.',
-                  'assets/pizza-slice.jpg',
+                  'assets/pizza_boxes.JPG',
                   () => Navigator.pushNamed(context, '/order'),
                   true,
                 ),
@@ -297,7 +319,7 @@ class HomePage extends StatelessWidget {
                   context,
                   'The Menu',
                   'From classic Margherita to seasonal specials—explore our wood-fired creations.',
-                  'assets/margherita-pizza.jpg',
+                  'assets/pasta 1.JPG',
                   () => Navigator.pushNamed(context, '/menu'),
                   false,
                 ),
@@ -306,7 +328,7 @@ class HomePage extends StatelessWidget {
                   context,
                   'Feature Gallery',
                   'A visual feast of our pizzas, space, and the moments we cherish.',
-                  'assets/pizzeria-interior.jpg',
+                  'assets/oven_pizza_2.jpg',
                   () => Navigator.pushNamed(context, '/gallery'),
                   false,
                 ),
@@ -315,7 +337,7 @@ class HomePage extends StatelessWidget {
                   context,
                   'Order Now',
                   'Can\'t make it to the Grove? We\'ll bring the fire to your doorstep.',
-                  'assets/pizza-slice.jpg',
+                  'assets/pizza_boxes.JPG',
                   () => Navigator.pushNamed(context, '/order'),
                   false,
                 ),

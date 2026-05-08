@@ -78,7 +78,7 @@ class OutdoorCateringPage extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
-              'assets/pizza-making.jpg',
+              'assets/pizza_in_making.JPG',
               width: double.infinity,
               height: isSmallScreen ? 300 : 500,
               fit: BoxFit.cover,
@@ -231,7 +231,7 @@ class OutdoorCateringPage extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.asset(
-                      'assets/pizzeria-interior.jpg',
+                      'assets/picnic.JPG',
                       height: 400,
                       fit: BoxFit.cover,
                     ),

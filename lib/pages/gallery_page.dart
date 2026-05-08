@@ -17,12 +17,40 @@ class _GalleryPageState extends State<GalleryPage> {
   String activeFilter = 'ALL';
 
   final List<Map<String, String>> _galleryItems = [
-    {'image': 'assets/margherita-pizza.jpg', 'category': 'THE FOOD'},
-    {'image': 'assets/pizza-slice.jpg', 'category': 'THE FOOD'},
-    {'image': 'assets/pizza-making.jpg', 'category': 'THE PEOPLE'},
-    {'image': 'assets/pizzeria-interior.jpg', 'category': 'THE AMBIANCE'},
-    {'image': 'assets/margherita-pizza.jpg', 'category': 'THE FOOD'},
-    {'image': 'assets/truffle-pizza.jpg', 'category': 'THE FOOD'},
+    {'image': 'assets/pizza_in_making.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/pasta 1.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/chef_with_the_boxes.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/smoky_oven.JPG', 'category': 'THE AMBIANCE'},
+    {'image': 'assets/pizza_boxes.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/from_fire_to_table.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/base_in_the_air.jpg', 'category': 'THE PEOPLE'},
+    {'image': 'assets/oven_pizza_2.jpg', 'category': 'THE AMBIANCE'},
+    {'image': 'assets/picnic.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/getting_pizza_out.JPG', 'category': 'THE AMBIANCE'},
+    {'image': 'assets/IMG_2913.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/pasta 2.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/team_1.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/team_2.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/team_3.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/chef_1.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/chef_2.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/dough_in_the_air.JPG', 'category': 'THE AMBIANCE'},
+    {'image': 'assets/eating_pizza.JPG', 'category': 'THE AMBIANCE'},
+    {'image': 'assets/eating_pizza_1.JPG', 'category': 'THE AMBIANCE'},
+    {'image': 'assets/popeys_protein_1.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/Classic_Paparoni.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/creamy_pesto_farfalle.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/Mushroom Bechamel with Spaghetti.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/Sweet Potato Gnocchi with Sundried Tomato Sauce.jpg', 'category': 'THE FOOD'},
+    {'image': 'assets/dough_by_the_bros.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/team_4.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/team_5.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/team_6.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/chef_3.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/chef_4.JPG', 'category': 'THE PEOPLE'},
+    {'image': 'assets/creamy_pesto_farfalle_2.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/Mushroom Bechamel with Spaghetti_1.JPG', 'category': 'THE FOOD'},
+    {'image': 'assets/popeys_protein_2.JPG', 'category': 'THE FOOD'},
   ];
 
   @override
@@ -187,42 +215,40 @@ class _GalleryPageState extends State<GalleryPage> {
         horizontalPadding,
         100,
       ),
-      child: isSmallScreen
-          ? Column(
-              children: filteredItems
-                  .map(
-                    (item) => Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: Image.asset(
-                          item['image']!,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  )
-                  .toList(),
-            )
-          : MasonryGridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 3,
-              mainAxisSpacing: 24,
-              crossAxisSpacing: 24,
-              itemCount: filteredItems.length,
-              itemBuilder: (context, index) {
-                // To mimic the design, we can vary the aspect ratios or just use fit
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: Image.asset(
-                    filteredItems[index]['image']!,
-                    fit: BoxFit.cover,
-                  ),
+      child: MasonryGridView.count(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        crossAxisCount: isSmallScreen ? 1 : 3,
+        mainAxisSpacing: 24,
+        crossAxisSpacing: 24,
+        itemCount: filteredItems.length,
+        itemBuilder: (context, index) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Image.asset(
+              filteredItems[index]['image']!,
+              fit: BoxFit.cover,
+              // Optimization: Decode images at a smaller size to save memory
+              cacheWidth: isSmallScreen ? 800 : 600,
+              // Use a placeholder to make loading feel smoother
+              frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                if (wasSynchronouslyLoaded) return child;
+                return AnimatedOpacity(
+                  opacity: frame == null ? 0 : 1,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeOut,
+                  child: child,
                 );
               },
+              errorBuilder: (context, error, stackTrace) => Container(
+                height: 200,
+                color: AppColors.groveCream,
+                child: const Icon(Icons.broken_image, color: Colors.grey),
+              ),
             ),
+          );
+        },
+      ),
     );
   }
 

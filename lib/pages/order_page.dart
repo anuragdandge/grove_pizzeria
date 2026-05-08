@@ -94,7 +94,7 @@ class OrderPage extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: Image.asset(
-              'assets/hero-pizza.jpg',
+              'assets/pizza_boxes.JPG',
               width: isSmallScreen ? double.infinity : 800,
               height: isSmallScreen ? 180 : 350,
               fit: BoxFit.cover,

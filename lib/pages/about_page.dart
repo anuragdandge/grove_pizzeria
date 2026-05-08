@@ -28,6 +28,7 @@ class AboutPage extends StatelessWidget {
               _buildOurStorySection(context, isSmallScreen),
               _buildAboutDetailSection(context, isSmallScreen),
               _buildPillarsSection(context, isSmallScreen),
+              _buildTeamSection(context, isSmallScreen),
               _buildVisitUsSection(context, isSmallScreen),
             ],
           ),
@@ -65,10 +66,19 @@ class AboutPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: Image.asset(
-                'assets/pizzeria-interior.jpg',
+                'assets/team_2.JPG',
                 width: double.infinity,
                 height: 250,
                 fit: BoxFit.cover,
+                cacheWidth: 800,
+                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                  if (wasSynchronouslyLoaded) return child;
+                  return AnimatedOpacity(
+                    opacity: frame == null ? 0 : 1,
+                    duration: const Duration(milliseconds: 500),
+                    child: child,
+                  );
+                },
               ),
             ),
           ],
@@ -153,10 +163,19 @@ class AboutPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: Image.asset(
-                'assets/margherita-pizza.jpg',
+                'assets/dough_by_the_bros.JPG',
                 width: double.infinity,
                 height: 250,
                 fit: BoxFit.cover,
+                cacheWidth: 800,
+                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                  if (wasSynchronouslyLoaded) return child;
+                  return AnimatedOpacity(
+                    opacity: frame == null ? 0 : 1,
+                    duration: const Duration(milliseconds: 500),
+                    child: child,
+                  );
+                },
               ),
             ),
           ],
@@ -171,10 +190,19 @@ class AboutPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(
-                'assets/pizzeria-interior.jpg',
+                'assets/team_1.JPG',
                 width: double.infinity,
                 height: 500,
                 fit: BoxFit.cover,
+                cacheWidth: 1200,
+                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                  if (wasSynchronouslyLoaded) return child;
+                  return AnimatedOpacity(
+                    opacity: frame == null ? 0 : 1,
+                    duration: const Duration(milliseconds: 500),
+                    child: child,
+                  );
+                },
               ),
             ),
             const SizedBox(height: 80),
@@ -231,10 +259,19 @@ class AboutPage extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(
-                          'assets/margherita-pizza.jpg',
+                          'assets/dough_in_the_air.JPG',
                           width: double.infinity,
                           height: 280,
                           fit: BoxFit.cover,
+                          cacheWidth: 800,
+                          frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                            if (wasSynchronouslyLoaded) return child;
+                            return AnimatedOpacity(
+                              opacity: frame == null ? 0 : 1,
+                              duration: const Duration(milliseconds: 500),
+                              child: child,
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -247,6 +284,89 @@ class AboutPage extends StatelessWidget {
         ),
       );
     }
+  }
+
+  Widget _buildTeamSection(BuildContext context, bool isSmallScreen) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 100,
+        horizontal: isSmallScreen ? 30 : 120,
+      ),
+      child: Column(
+        children: [
+          Text(
+            'THE MAKERS',
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: AppColors.groveEspresso.withOpacity(0.6),
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'Meet the Team',
+            style: GoogleFonts.playfairDisplay(
+              fontSize: isSmallScreen ? 40 : 56,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              color: AppColors.groveEspresso,
+            ),
+          ),
+          const SizedBox(height: 60),
+          if (isSmallScreen)
+            Column(
+              children: [
+                _buildTeamMember(context, 'assets/chef_1.JPG', 'Chef Anthony', 'Master Pizzaiolo'),
+                const SizedBox(height: 40),
+                _buildTeamMember(context, 'assets/chef_2.JPG', 'Chef Marco', 'Pasta Specialist'),
+                const SizedBox(height: 40),
+                _buildTeamMember(context, 'assets/team_3.JPG', 'The Service Crew', 'Heart of the House'),
+              ],
+            )
+          else
+            Row(
+              children: [
+                Expanded(child: _buildTeamMember(context, 'assets/chef_1.JPG', 'Chef Anthony', 'Master Pizzaiolo')),
+                const SizedBox(width: 40),
+                Expanded(child: _buildTeamMember(context, 'assets/chef_2.JPG', 'Chef Marco', 'Pasta Specialist')),
+                const SizedBox(width: 40),
+                Expanded(child: _buildTeamMember(context, 'assets/team_3.JPG', 'The Service Crew', 'Heart of the House')),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTeamMember(BuildContext context, String image, String name, String role) {
+    return Column(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: Image.asset(
+            image,
+            width: double.infinity,
+            height: 400,
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SizedBox(height: 24),
+        Text(
+          name,
+          style: GoogleFonts.playfairDisplay(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: AppColors.groveEspresso,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          role,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            color: AppColors.groveEspresso.withOpacity(0.6),
+            letterSpacing: 2,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildPillarsSection(BuildContext context, bool isSmallScreen) {
